@@ -1,18 +1,28 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import '../styles/Characters.css'
 
 const Characters = (props) => {
     const [characters, setCharacters] = useState([])
     const { darkMode } = props;
+    const arrayOfCharacters = []
 
     useEffect(() => {
+        loadAllCharacters();
         fetchData();
     }, [])
 
-    const fetchData = () => {
-        fetch(`https://rickandmortyapi.com/api/character/`)
-            .then(response => response.json())
-            .then(data => setCharacters(data.results))
+    const fetchData = async () => {
+        for (let i = 1; i <= 4; i++) {
+            const response = await axios.get(`https://rickandmortyapi.com/api/character/${arrayOfCharacters}`)
+            setCharacters(response.data)
+        }
+    }
+
+    const loadAllCharacters = () => {
+        for (let i = 1; i <= 671; i++) {
+            arrayOfCharacters.push(i);
+        }
     }
 
     return (
