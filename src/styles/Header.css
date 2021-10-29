@@ -1,0 +1,85 @@
+.css-button-light {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    z-index: 0;
+    background: #fff;
+    overflow: hidden;
+    border: 2px solid #212529;
+    color: #212529;
+  }
+  .css-button-light:hover {
+    background: #212529;
+    color: #fff
+  }
+  .css-button-light:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transition: all 0.3s ease;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: #212529;
+  }
+
+  .css-button-dark {
+    min-width: 130px;
+    height: 40px;
+    color: #212529;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    z-index: 0;
+    background: #212529;
+    overflow: hidden;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  .css-button-dark:hover {
+    background: #fff;
+    color: #212529
+  }
+  .css-button-dark:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    transition: all 0.3s ease;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: whitesmoke;
+  }
+
+  .Header-light{
+    background-color: #fff;
+  }
+
+  .Header-dark{
+    background-color: #212529;
+  }
+
+  .title-light{
+    color: #212529;
+    font-size: 2rem;
+  }
+
+  .title-dark{
+    color: #fff;
+    font-size: 2rem;
+  }

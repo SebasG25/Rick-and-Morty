@@ -1,23 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import Characters from './components/Characters';
+import Header from './components/Header';
+import useTheme from './context/useTheme'
 
 function App() {
+  const { darkMode, toggleTheme } = useTheme()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`${darkMode ? 'dark' : 'light'} container-fluid p-4`}>
+      <Header darkMode={darkMode} toggleTheme={toggleTheme}/>
+      <Characters darkMode={darkMode}/>
     </div>
   );
 }
