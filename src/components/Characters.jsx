@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import '../styles/Characters.css'
+import { animateScroll as scroll } from 'react-scroll';
 
 const Characters = (props) => {
     const [characters, setCharacters] = useState([])
@@ -23,6 +24,10 @@ const Characters = (props) => {
         for (let i = 1; i <= 671; i++) {
             arrayOfCharacters.push(i);
         }
+    }
+
+    const onClickUp = () => {
+        scroll.scrollToTop();
     }
 
     return (
@@ -49,7 +54,10 @@ const Characters = (props) => {
                         </div>
                     </div>
                 ))}
+                <button className={`up-${darkMode ? 'dark' : 'light'}`} onClick={onClickUp}>Up</button>
             </div>
+
+
         </div>
     )
 }
