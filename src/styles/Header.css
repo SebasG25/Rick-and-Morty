@@ -77,9 +77,19 @@
   .title-light{
     color: #212529;
     font-size: 2rem;
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
   }
 
   .title-dark{
     color: #fff;
     font-size: 2rem;
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+  }
+
+  .input{
+    border-radius: 5px;
   }
