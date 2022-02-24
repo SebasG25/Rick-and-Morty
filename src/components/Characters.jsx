@@ -2,26 +2,31 @@ import axios from 'axios';
 import React, { useState, useEffect, useMemo } from 'react'
 import '../styles/Characters.css'
 import { animateScroll as scroll } from 'react-scroll';
+import useTheme from '../context/useTheme'
+import Card from './Card'
 
-const Characters = (props) => {
+const Characters = () => {
     const [characters, setCharacters] = useState([])
-    const { darkMode, search } = props;
+    const [isLoading, setIsLoading] = useState(true)
+    const { darkMode, search } = useTheme()
     const arrayOfCharacters = []
 
     useEffect(() => {
-        loadAllCharacters();
-        fetchData();
+        loadAllCharacters()
+        fetchData()
     }, [])
 
     const fetchData = async () => {
+        setIsLoading(true)
         for (let i = 1; i <= 4; i++) {
             const response = await axios.get(`https://rickandmortyapi.com/api/character/${arrayOfCharacters}`)
             setCharacters(response.data)
         }
+        setIsLoading(false)
     }
 
     const loadAllCharacters = () => {
-        for (let i = 1; i <= 671; i++) {
+        for (let i = 1; i <= 50; i++) {
             arrayOfCharacters.push(i);
         }
     }
@@ -42,32 +47,23 @@ const Characters = (props) => {
     return (
         <div className="Characters p-4">
             <div className="row">
-                {filteredUsers.length === 0 ?
-                    <h3 className={`m-0 ${darkMode ? 'dark' : 'light'}`}>No characters found with name: {search}</h3>
-                    :filteredUsers.map(character => (
-                        <div className="col-lg-2 col-md-3 col-sm-4 col-6" key={character.id}>
-                            <div className={`card ${darkMode ? 'dark' : 'light'} my-2 box-shadow`} style={{ width: 'auto', height: 'auto' }}>
-                                <img src={character.image} className="card-img-top img-fluid" alt="character" />
-                                <div className="card-body p-0">
-                                    <div className="card-title pt-2">
-                                        <h6 className={`${darkMode ? 'character-name-dark' : 'character-name-light'}`}>{character.name.toUpperCase()}</h6>
-                                    </div>
-                                    <div className="card-text">
-                                        <p className={`m-0 ${darkMode ? 'dark' : 'light'}`}>{`${character.status === 'Dead' ? '💔'
-                                            : character.status === 'Alive' ? '💚' : '💙'} ${character.status}`}</p>
-                                        <p className={`m-0 ${darkMode ? 'dark' : 'light'}`}>{`${character.gender === 'Male' ? '👨' : '👩'} ${character.gender}`}</p>
-                                        <p className={`m-0 ${darkMode ? 'dark' : 'light'}`}>{character.species}</p>
-                                        <p className={`m-0 ${darkMode ? 'dark' : 'light'}`}><b>Location: </b>{character.location.name}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))
+                {isLoading ? <h3 className={`m-0 ${darkMode ? 'dark' : 'light'}`}>Loading...</h3>
+                    : filteredUsers.length === 0 ?
+                        <h3 className={`m-0 ${darkMode ? 'dark' : 'light'}`}>No characters found with name: {search}</h3>
+                        : filteredUsers.map(character => (
+                            <Card 
+                            id={character.id} 
+                            name={character.name}
+                            image={character.image}
+                            status={character.status}
+                            gender={character.gender}
+                            species={character.species}
+                            location={character.location.name}
+                            />
+                        ))
                 }
                 <button className={`up-${darkMode ? 'dark' : 'light'}`} onClick={onClickUp}>^</button>
             </div>
-
-
         </div>
     )
 }

@@ -14,10 +14,12 @@ h6, h3 {
 
 .character-name-dark {
     color: #fff;
+    transition: background-color 0.2s ease-out;
 }
 
 .character-name-light {
     color: #000;
+    transition: background-color 0.2s ease-out;
 }
 
 p, h6, h3 {
@@ -26,22 +28,26 @@ p, h6, h3 {
 
 h3.dark{
     color: #fff;
+    transition: background-color 0.2s ease-out;
 }
 
 h3.light{
     color: #212529;
+    transition: background-color 0.2s ease-out;
 }
 
 p.dark {
     color: #fff;
+    transition: background-color 0.2s ease-out;
 }
 
 p.light {
     color: #000;
-}
+    transition: background-color 0.2s ease-out}
 
 div.dark {
     background-color: #212529;
+    transition: background-color 0.2s ease-out;
 }
 
 .up-dark {

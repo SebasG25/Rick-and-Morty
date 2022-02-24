@@ -1,8 +1,9 @@
 import React from 'react'
+import useTheme from '../context/useTheme'
 import '../styles/Header.css'
 
-const Header = (props) => {
-    const { darkMode, toggleTheme, onSearchChangeHandler, search } = props;
+const Header = () => {
+    const { darkMode, toggleTheme, onSearchChangeHandler, search } = useTheme()
 
     return (
         <div className={`${darkMode ? 'Header-dark' : 'Header-light'} d-flex m-4 justify-content-around row`}>
@@ -10,7 +11,8 @@ const Header = (props) => {
                 <h1 className={`${darkMode ? 'title-dark' : 'title-light'}`}>React Hooks {'😄'}</h1>
             </div>
             <div className="col-12 col-sm-1 col-md-1 col-lg-1 align-self-center">
-                <input type="text" className="input" value={search} placeholder='Search a character' onChange={onSearchChangeHandler}/>
+                <input type="text" className="input" value={search} placeholder='Search a character' 
+                onChange={onSearchChangeHandler} maxLength='30'/>
             </div>
             <div className="col-12 col-sm-4 col-md-2 col-lg-1">
                 <button className={darkMode ? 'css-button-dark' : 'css-button-light'} type="button" onClick={toggleTheme}>{darkMode ? 'Dark Mode' : 'Light Mode'}</button>
