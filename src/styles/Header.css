@@ -97,4 +97,7 @@
   .input{
     border-radius: 5px;
     height: 40px;
+    text-align: center;
+    padding-left: 4px;
+
   }

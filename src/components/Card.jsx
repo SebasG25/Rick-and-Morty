@@ -1,11 +1,12 @@
 import React from 'react'
 import useTheme from '../context/useTheme'
+import styles from '../styles/Character.module.css'
 
 const Card = ({ id, name, image, status, gender, species, location }) => {
     const { darkMode } = useTheme()
 
     return (
-        <div className="col-lg-2 col-md-3 col-sm-4 col-6" key={id}>
+        <div className={`${styles['col-lg-2']} ${styles['col-md-3']} ${styles['col-sm-4']} ${styles['col-6']}`} key={id}>
             <div className={`card ${darkMode ? 'dark' : 'light'} my-2 box-shadow`} style={{ width: 'auto', height: 'auto' }}>
                 <img src={image} className="card-img-top img-fluid" alt="character" />
                 <div className="card-body p-0">
