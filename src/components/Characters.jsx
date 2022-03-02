@@ -2,33 +2,33 @@ import axios from 'axios';
 import React, { useState, useEffect, useMemo } from 'react'
 import '../styles/Characters.css'
 import { animateScroll as scroll } from 'react-scroll';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import useTheme from '../context/useTheme'
 import Card from './Card'
+import Loading from './Loading'
 
 const Characters = () => {
     const [characters, setCharacters] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [page, setPage] = useState(1)
+    const [hasMore, setHasMore] = useState(true)
     const { darkMode, search } = useTheme()
-    const arrayOfCharacters = []
 
     useEffect(() => {
-        loadAllCharacters()
+        console.log(page)
         fetchData()
-    }, [])
+    }, [page])
 
     const fetchData = async () => {
         setIsLoading(true)
-        for (let i = 1; i <= 4; i++) {
-            const response = await axios.get(`https://rickandmortyapi.com/api/character/${arrayOfCharacters}`)
-            setCharacters(response.data)
+        try {
+            let { data } = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`)
+            setCharacters(prevCharacters => prevCharacters.concat(data.results))
+            setHasMore(data.info.next)
+        } catch (error) {
+            console.error(error.message)
         }
         setIsLoading(false)
-    }
-
-    const loadAllCharacters = () => {
-        for (let i = 1; i <= 50; i++) {
-            arrayOfCharacters.push(i);
-        }
     }
 
     const onClickUp = () => {
@@ -45,26 +45,33 @@ const Characters = () => {
     )
 
     return (
-        <div className="Characters p-4">
-            <div className="row">
-                {isLoading ? <h3 className={`m-0 ${darkMode ? 'dark' : 'light'}`}>Loading...</h3>
-                    : filteredUsers.length === 0 ?
+        <InfiniteScroll
+            dataLength={filteredUsers.length}
+            next={() => setPage(prevPage => prevPage + 1)}
+            hasMore={hasMore}
+            loader={<Loading />}
+            style={{ overflow: 'hidden' }}
+        >
+            <div className="Characters p-4">
+                <div className="row">
+                    {filteredUsers.length === 0 ?
                         <h3 className={`m-0 ${darkMode ? 'dark' : 'light'}`}>No characters found with name: {search}</h3>
                         : filteredUsers.map(character => (
-                            <Card 
-                            id={character.id} 
-                            name={character.name}
-                            image={character.image}
-                            status={character.status}
-                            gender={character.gender}
-                            species={character.species}
-                            location={character.location.name}
+                            <Card
+                                id={character.id}
+                                name={character.name}
+                                image={character.image}
+                                status={character.status}
+                                gender={character.gender}
+                                species={character.species}
+                                location={character.location.name}
                             />
                         ))
-                }
-                <button className={`up-${darkMode ? 'dark' : 'light'}`} onClick={onClickUp}>^</button>
+                    }
+                    <button className={`up-${darkMode ? 'dark' : 'light'}`} onClick={onClickUp}>^</button>
+                </div>
             </div>
-        </div>
+        </InfiniteScroll>
     )
 }
 

@@ -11,7 +11,7 @@ const Header = () => {
                 <h1 className={`${darkMode ? 'title-dark' : 'title-light'}`}>React Hooks {'😄'}</h1>
             </div>
             <div className="col-12 col-sm-1 col-md-1 col-lg-1 align-self-center">
-                <input type="text" className="input" value={search} placeholder='Search a character hola bbsito' 
+                <input type="text" className="input" value={search} placeholder='Search a character' 
                 onChange={onSearchChangeHandler} maxLength='30'/>
             </div>
             <div className="col-12 col-sm-4 col-md-2 col-lg-1">
