@@ -26,16 +26,6 @@ p, h6, h3 {
     text-align: center;
 }
 
-h3.dark{
-    color: #fff;
-    transition: background-color 0.2s ease-out;
-}
-
-h3.light{
-    color: #212529;
-    transition: background-color 0.2s ease-out;
-}
-
 p.dark {
     color: #fff;
     transition: background-color 0.2s ease-out;
